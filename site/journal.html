@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Журнал — AttendBot</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <div class="nav__logo-icon">🤖</div>
+      AttendBot
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="about.html">О проекте</a></li>
+      <li><a href="team.html">Команда</a></li>
+      <li><a href="journal.html" class="active">Журнал</a></li>
+      <li><a href="resources.html">Ресурсы</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <span class="section-label">Прогресс</span>
+    <h1 class="page-header__title">Журнал разработки</h1>
+    <p class="page-header__desc">
+      Хронология ключевых этапов работы над проектом AttendBot
+    </p>
+  </div>
+</div>
+
+<section class="section-sm">
+  <div class="container">
+    <div style="max-width:780px; margin:0 auto">
+      <div class="timeline">
+
+        <!-- Post 1 — Oldest -->
+        <div class="timeline-item">
+          <div class="timeline-item__date">Апрель 2025 · Этап 1</div>
+          <div class="timeline-item__card">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+              <span class="card__tag">Готово</span>
+              <span style="font-family:var(--font-display);font-size:.75rem;color:var(--text)">Старт проекта</span>
+            </div>
+            <h3 style="margin-bottom:16px">Постановка задачи, выбор стека и MVP</h3>
+            <p>
+              Первый месяц работы над проектом. Определена концепция: администратор
+              запускает опрос через Telegram, бот рассылает вопрос всем
+              зарегистрированным пользователям, собирает ответы и сохраняет причины
+              отсутствия. Исследованы существующие решения и сформулированы
+              функциональные требования.
+            </p>
+            <p style="margin-top:12px">
+              Выбран стек: Python + <span class="mono">aiogram</span> (asyncio) +
+              <span class="mono">aiosqlite</span> + SQLite. Создан репозиторий на GitHub,
+              настроена структура папок и написан первоначальный README. Реализован
+              proof-of-concept: бот регистрирует пользователя при первом сообщении
+              и отвечает на <span class="mono">/start</span>.
+            </p>
+            <p style="margin-top:12px">
+              <strong>Ключевые решения этапа:</strong>
+            </p>
+            <ul class="feature-list" style="margin-top:10px">
+              <li>Выбран <span class="mono">aiogram</span> за встроенную поддержку FSM — нужна для ветки «Причина отсутствия»</li>
+              <li>Права администратора проверяются по <span class="mono">ADMIN_ID</span> из конфига — без отдельной таблицы ролей</li>
+              <li>Решено использовать SQLite вместо PostgreSQL — для простоты деплоя</li>
+              <li>Две таблицы БД: <span class="mono">users</span> и <span class="mono">attendance</span> — этого достаточно для задачи</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Post 2 -->
+        <div class="timeline-item">
+          <div class="timeline-item__date">Май 2025 · Этап 2</div>
+          <div class="timeline-item__card">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+              <span class="card__tag">Готово</span>
+              <span style="font-family:var(--font-display);font-size:.75rem;color:var(--text)">Ядро системы</span>
+            </div>
+            <h3 style="margin-bottom:16px">База данных, рассыльщик и FSM</h3>
+            <p>
+              Самый технически насыщенный этап. Спроектирована схема базы данных
+              с двумя таблицами и реализованы все операции через
+              <span class="mono">aiosqlite</span> для неблокирующей работы
+              в асинхронном окружении.
+            </p>
+            <p style="margin-top:12px">
+              Реализован модуль <span class="mono accent">broadcaster.py</span>:
+              при команде <span class="mono">/poll</span> от администратора бот
+              выбирает все <span class="mono">chat_id</span> из таблицы
+              <span class="mono">users</span> и последовательно рассылает
+              сообщение с инлайн-кнопками «Да ✅» / «Нет ❌».
+            </p>
+            <p style="margin-top:12px">
+              <strong>Проблема, с которой столкнулись:</strong> при нажатии «Нет»
+              нужно дождаться следующего произвольного сообщения от пользователя
+              и распознать его как причину. Решено через FSM-состояние
+              <span class="mono">WaitingReason</span> — бот переходит в него
+              после нажатия кнопки и выходит после получения текста.
+            </p>
+            <div style="margin-top:20px">
+              <div class="code-block">
+                <span class="cmt"># Пример записи в таблице attendance</span><br>
+                {<span class="str">"user_id"</span>: <span class="kw">42</span>,<br>
+                &nbsp;<span class="str">"present"</span>: <span class="kw">False</span>,<br>
+                &nbsp;<span class="str">"reason"</span>: <span class="str">"Болею, есть справка"</span>,<br>
+                &nbsp;<span class="str">"asked_at"</span>: <span class="str">"2025-05-14 10:30:00"</span>,<br>
+                &nbsp;<span class="str">"marked_at"</span>: <span class="str">"2025-05-14 10:31:45"</span>}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <span class="footer__copy">© 2025 AttendBot — Проектная практика</span>
+      <ul class="footer__links">
+        <li><a href="about.html">О проекте</a></li>
+        <li><a href="team.html">Команда</a></li>
+        <li><a href="resources.html">Ресурсы</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

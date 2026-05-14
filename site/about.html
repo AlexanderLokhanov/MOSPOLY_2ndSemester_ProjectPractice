@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>О проекте — AttendBot</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <div class="nav__logo-icon">🤖</div>
+      AttendBot
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="about.html" class="active">О проекте</a></li>
+      <li><a href="team.html">Команда</a></li>
+      <li><a href="journal.html">Журнал</a></li>
+      <li><a href="resources.html">Ресурсы</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── PAGE HEADER ─────────────────────────────── -->
+<div class="page-header">
+  <div class="container">
+    <span class="section-label">О проекте</span>
+    <h1 class="page-header__title">AttendBot</h1>
+    <p class="page-header__desc">
+      Telegram-бот для учёта посещаемости: администратор запускает опрос,
+      студенты отвечают одной кнопкой, причины отсутствия сохраняются автоматически
+    </p>
+  </div>
+</div>
+
+<!-- ── PROBLEM / SOLUTION ─────────────────────── -->
+<section class="section-sm">
+  <div class="container">
+    <div class="grid-2" style="gap:48px; align-items:start">
+      <div>
+        <span class="section-label">Проблема</span>
+        <h2 style="margin-bottom:20px">Ручной учёт — это боль</h2>
+        <ul class="feature-list">
+          <li>Преподаватели тратят 5–10 минут на перекличку каждой пары</li>
+          <li>Бумажные журналы теряются, портятся и не дают быстрой аналитики</li>
+          <li>Причины отсутствия нигде не фиксируются систематически</li>
+          <li>Нет единой базы данных для анализа посещаемости по группе</li>
+          <li>Ручной ввод данных в деканат занимает дополнительное время</li>
+        </ul>
+      </div>
+      <div>
+        <span class="section-label">Решение</span>
+        <h2 style="margin-bottom:20px">Опрос через Telegram за секунды</h2>
+        <ul class="feature-list">
+          <li>Администратор запускает опрос одной командой</li>
+          <li>Бот рассылает вопрос всем зарегистрированным студентам</li>
+          <li>Студент отвечает нажатием одной кнопки — «Да» или «Нет»</li>
+          <li>При ответе «Нет» бот запрашивает причину и сохраняет её</li>
+          <li>Все данные мгновенно попадают в базу данных</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── HOW IT WORKS ────────────────────────────── -->
+<section class="section-sm">
+  <div class="container">
+    <span class="section-label">Сценарий использования</span>
+    <h2 style="margin-bottom:32px">Как проходит опрос</h2>
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card__tag">Шаг 1</div>
+        <h3>Администратор запускает опрос</h3>
+        <p style="margin-top:12px">
+          Пользователь с правами администратора (проверяется по
+          <span class="mono accent">ADMIN_ID</span> из конфига) отправляет команду
+          <span class="mono">/poll</span>. Бот проверяет права и начинает рассылку.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card__tag">Шаг 2</div>
+        <h3>Рассылка вопроса</h3>
+        <p style="margin-top:12px">
+          Бот отправляет всем пользователям, хоть раз написавшим боту,
+          вопрос <em>«Вы на паре?»</em> с двумя инлайн-кнопками:
+          <span class="mono accent">Да ✅</span> и <span class="mono accent">Нет ❌</span>.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card__tag">Шаг 3</div>
+        <h3>Ответ и причина</h3>
+        <p style="margin-top:12px">
+          При нажатии «Да» — отметка сохраняется сразу. При «Нет» — бот
+          просит написать причину отсутствия текстом. Ответ фиксируется
+          в таблице <span class="mono">attendance</span>.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── ARCHITECTURE ────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <span class="section-label">Архитектура</span>
+    <h2 class="section-title" style="margin-bottom:40px">Как устроен бот</h2>
+
+    <div class="grid-2" style="gap:32px">
+
+      <div class="card">
+        <div class="card__tag">Модуль 1</div>
+        <h3>Обработчики Telegram</h3>
+        <p style="margin-top:12px">
+          Модуль <span class="mono accent">main.py</span> содержит все
+          хендлеры бота: регистрацию новых пользователей при первом
+          обращении (<span class="mono">/start</span>), проверку прав
+          администратора, запуск рассылки командой
+          <span class="mono">/poll</span> и обработку кнопок
+          «Да» / «Нет».
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card__tag">Модуль 2</div>
+        <h3>Сбор причины отсутствия</h3>
+        <p style="margin-top:12px">
+          Когда студент нажимает «Нет», бот переводит диалог в состояние
+          ожидания текста (<span class="mono">FSM</span>). Следующее
+          сообщение пользователя воспринимается как причина и сохраняется
+          в поле <span class="mono">reason</span> таблицы
+          <span class="mono">attendance</span>.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card__tag">Модуль 3</div>
+        <h3>Рассыльщик</h3>
+        <p style="margin-top:12px">
+          Модуль <span class="mono accent">broadcaster.py</span> получает
+          список всех <span class="mono">chat_id</span> из таблицы
+          <span class="mono">users</span> и последовательно отправляет
+          каждому сообщение с инлайн-клавиатурой через
+          <span class="mono">aiogram</span>.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card__tag">Модуль 4</div>
+        <h3>База данных</h3>
+        <p style="margin-top:12px">
+          Модуль <span class="mono accent">database.py</span> управляет
+          двумя таблицами SQLite: <span class="mono">users</span>
+          (все когда-либо написавшие боту) и
+          <span class="mono">attendance</span> (отметки посещаемости
+          с причиной отсутствия и временем ответа).
+        </p>
+      </div>
+    </div>
+
+    <!-- Architecture Scheme -->
+    <div style="margin-top:48px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px; text-align:center">
+      <div style="font-family:var(--font-mono);font-size:.8rem;color:var(--text);line-height:2.5;overflow-x:auto">
+        <div style="display:inline-flex;flex-direction:column;gap:0;align-items:center;min-width:560px">
+
+          <div style="display:flex;gap:32px;align-items:center;justify-content:center;flex-wrap:wrap">
+            <div style="padding:10px 20px;border:1px solid var(--border);border-radius:8px;color:var(--accent)">Администратор → /poll</div>
+            <div style="color:var(--text)">→ проверка ADMIN_ID →</div>
+            <div style="padding:10px 20px;border:1px solid rgba(74,244,176,.3);border-radius:8px;color:var(--text-bright)">broadcaster.py</div>
+          </div>
+
+          <div style="margin:8px 0;color:var(--text)">↓ рассылка всем users ↓</div>
+
+          <div style="display:flex;gap:32px;align-items:center;justify-content:center;flex-wrap:wrap">
+            <div style="padding:10px 20px;border:1px solid rgba(244,162,74,.3);border-radius:8px;color:var(--accent2)">Студент: кнопка Да / Нет</div>
+          </div>
+
+          <div style="margin:8px 0;display:flex;gap:80px;color:var(--text)">
+            <span>↙ Да</span>
+            <span>Нет ↘</span>
+          </div>
+
+          <div style="display:flex;gap:32px;align-items:center;justify-content:center;flex-wrap:wrap">
+            <div style="padding:10px 20px;border:1px solid rgba(74,244,176,.3);border-radius:8px;color:var(--text-bright)">attendance: present=True</div>
+            <div style="padding:10px 20px;border:1px solid rgba(244,162,74,.3);border-radius:8px;color:var(--accent2)">FSM → ввод причины</div>
+          </div>
+
+          <div style="margin:8px 0;color:var(--text)">↓</div>
+
+          <div style="padding:10px 20px;border:1px solid rgba(74,244,176,.3);border-radius:8px;color:var(--text-bright)">attendance: present=False, reason=&lt;текст&gt;</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── DB SCHEMA ───────────────────────────────── -->
+<section class="section-sm">
+  <div class="container">
+    <span class="section-label">База данных</span>
+    <h2 style="margin-bottom:32px">Схема таблиц</h2>
+    <div class="grid-2" style="max-width:800px">
+      <div>
+        <div class="card__tag">users</div>
+        <div class="code-block" style="margin-top:12px">
+          <span class="kw">id</span>         INTEGER PK<br>
+          <span class="kw">chat_id</span>    INTEGER UNIQUE<br>
+          <span class="kw">username</span>   TEXT<br>
+          <span class="kw">first_name</span> TEXT<br>
+          <span class="kw">created_at</span> DATETIME
+        </div>
+      </div>
+      <div>
+        <div class="card__tag">attendance</div>
+        <div class="code-block" style="margin-top:12px">
+          <span class="kw">id</span>          INTEGER PK<br>
+          <span class="kw">user_id</span>     INTEGER FK → users<br>
+          <span class="kw">present</span>     BOOLEAN<br>
+          <span class="kw">reason</span>      TEXT<br>
+          <span class="kw">asked_at</span>    DATETIME<br>
+          <span class="kw">marked_at</span>   DATETIME
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <span class="footer__copy">© 2026 AttendBot — Проектная практика</span>
+      <ul class="footer__links">
+        <li><a href="team.html">Команда</a></li>
+        <li><a href="journal.html">Журнал</a></li>
+        <li><a href="resources.html">Ресурсы</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

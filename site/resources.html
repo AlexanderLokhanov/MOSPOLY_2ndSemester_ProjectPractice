@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ресурсы — AttendBot</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <div class="nav__logo-icon">🤖</div>
+      AttendBot
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="about.html">О проекте</a></li>
+      <li><a href="team.html">Команда</a></li>
+      <li><a href="journal.html">Журнал</a></li>
+      <li><a href="resources.html" class="active">Ресурсы</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <span class="section-label">Материалы</span>
+    <h1 class="page-header__title">Ресурсы проекта</h1>
+    <p class="page-header__desc">
+      Документация, библиотеки, статьи и инструменты,
+      использованные в разработке AttendBot
+    </p>
+  </div>
+</div>
+
+<section class="section-sm">
+  <div class="container">
+
+    <!-- Telegram & Bot API -->
+    <span class="section-label">Telegram</span>
+    <h2 style="margin-bottom:24px">Bot API и библиотека</h2>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:56px">
+      <a href="https://core.telegram.org/bots/api" target="_blank" class="resource-item">
+        <div class="resource-item__icon">📖</div>
+        <div>
+          <div class="resource-item__title">Telegram Bot API — официальная документация</div>
+          <div class="resource-item__desc">Полное описание методов Bot API: отправка сообщений, инлайн-кнопки, webhook и polling.</div>
+          <span class="resource-item__link">https://core.telegram.org/bots/api</span>
+        </div>
+      </a>
+      <a href="https://docs.python-telegram-bot.org/" target="_blank" class="resource-item">
+        <div class="resource-item__icon">🐍</div>
+        <div>
+          <div class="resource-item__title">python-telegram-bot v21 — документация</div>
+          <div class="resource-item__desc">Асинхронная Python-обёртка над Telegram Bot API. Использована в проекте как основа.</div>
+          <span class="resource-item__link">https://docs.python-telegram-bot.org/</span>
+        </div>
+      </a>
+      <a href="https://github.com/python-telegram-bot/python-telegram-bot/tree/master/examples" target="_blank" class="resource-item">
+        <div class="resource-item__icon">💡</div>
+        <div>
+          <div class="resource-item__title">Примеры python-telegram-bot</div>
+          <div class="resource-item__desc">Официальные примеры, в т.ч. ConversationHandler — использован для сбора причины отсутствия.</div>
+          <span class="resource-item__link">github.com/python-telegram-bot/examples</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Database & Async -->
+    <span class="section-label">База данных</span>
+    <h2 style="margin-bottom:24px">SQLite и асинхронный доступ</h2>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:56px">
+      <a href="https://aiosqlite.omnilib.dev/" target="_blank" class="resource-item">
+        <div class="resource-item__icon">🗄️</div>
+        <div>
+          <div class="resource-item__title">aiosqlite — асинхронный SQLite</div>
+          <div class="resource-item__desc">Асинхронная обёртка над sqlite3. Позволяет использовать SQLite в asyncio-приложениях без блокировок.</div>
+          <span class="resource-item__link">https://aiosqlite.omnilib.dev/</span>
+        </div>
+      </a>
+      <a href="https://www.sqlite.org/lang.html" target="_blank" class="resource-item">
+        <div class="resource-item__icon">📚</div>
+        <div>
+          <div class="resource-item__title">SQLite SQL — справочник синтаксиса</div>
+          <div class="resource-item__desc">Официальная документация по SQL-диалекту SQLite. Использована при проектировании схемы БД.</div>
+          <span class="resource-item__link">https://www.sqlite.org/lang.html</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- General / Education -->
+    <span class="section-label">Учебные материалы</span>
+    <h2 style="margin-bottom:24px">Для углублённого изучения</h2>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <a href="https://git-scm.com/book/ru/v2" target="_blank" class="resource-item">
+        <div class="resource-item__icon">📘</div>
+        <div>
+          <div class="resource-item__title">Pro Git — официальная книга (на русском)</div>
+          <div class="resource-item__desc">Исчерпывающее руководство по Git. Использована для освоения веток, merge и rebase.</div>
+          <span class="resource-item__link">https://git-scm.com/book/ru/v2</span>
+        </div>
+      </a>
+      <a href="https://docs.python.org/3/library/asyncio.html" target="_blank" class="resource-item">
+        <div class="resource-item__icon">⚡</div>
+        <div>
+          <div class="resource-item__title">Python asyncio — документация</div>
+          <div class="resource-item__desc">Официальная документация по asyncio. Ключевой инструмент для понимания async/await в проекте.</div>
+          <span class="resource-item__link">https://docs.python.org/3/library/asyncio.html</span>
+        </div>
+      </a>
+      <a href="https://developer.mozilla.org/ru/docs/Web/CSS" target="_blank" class="resource-item">
+        <div class="resource-item__icon">🎨</div>
+        <div>
+          <div class="resource-item__title">MDN Web Docs — CSS</div>
+          <div class="resource-item__desc">Использован при разработке данного сайта для изучения CSS-переменных, grid и анимаций.</div>
+          <span class="resource-item__link">https://developer.mozilla.org/ru/docs/Web/CSS</span>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <span class="footer__copy">© 2025 AttendBot — Проектная практика</span>
+      <ul class="footer__links">
+        <li><a href="about.html">О проекте</a></li>
+        <li><a href="team.html">Команда</a></li>
+        <li><a href="journal.html">Журнал</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
