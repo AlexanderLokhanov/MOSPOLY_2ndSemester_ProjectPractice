@@ -1,5 +1,4 @@
-# Отчёты в бинарных форматах
-
-- В этот файл добавьте ссылки на файлы отчётов и краткое описание к ним.
-- Файлы могут быть в форматах DOCX, PDF и др.
-- Структура отчёта по проектной практике приведена в файле [practice_report_template.docx](practice_report_template.docx).
+## Отчёты в бинарных форматах
+- Основной отчёт - [AttendBot_practice_report.docx](./AttendBot_practice_report.docx).
+- Отчёт с приведением кода и описанием принципов работы - [my_task.md](../task/my_task.md).
+- Ход выполнения - [README.md](../docs/README.md)

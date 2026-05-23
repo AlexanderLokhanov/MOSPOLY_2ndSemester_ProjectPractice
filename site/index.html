@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AttendBot — Система учёта посещаемости</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ── NAVIGATION ──────────────────────────────── -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <div class="nav__logo-icon">🤖</div>
+      AttendBot
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html" class="active">Главная</a></li>
+      <li><a href="about.html">О проекте</a></li>
+      <li><a href="team.html">Команда</a></li>
+      <li><a href="journal.html">Журнал</a></li>
+      <li><a href="resources.html">Ресурсы</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <span class="hero__badge">
+      <span class="status-dot"></span>
+      Проектная практика 2026 · В разработке
+    </span>
+
+    <h1 class="hero__title">
+      Удобный учёт<br>
+      <em>посещаемости</em><br>
+      в вашем кармане
+    </h1>
+
+    <p class="hero__desc">
+      AttendBot — Telegram-бот, который собирает данные о присутствии
+      по команде администратора. Никаких бумажных журналов.
+    </p>
+
+    <div class="hero__actions">
+      <a href="about.html" class="btn btn-primary">Подробнее о проекте →</a>
+      <a href="journal.html" class="btn btn-outline">Смотреть прогресс</a>
+    </div>
+
+    <div class="hero__stats">
+      <div>
+        <div class="hero__stat-num accent">∞</div>
+        <div class="hero__stat-label">студентов одновременно</div>
+      </div>
+      <div>
+        <div class="hero__stat-num">1</div>
+        <div class="hero__stat-label">разработчик</div>
+      </div>
+      <div>
+        <div class="hero__stat-num">72</div>
+        <div class="hero__stat-label">часа практики</div>
+      </div>
+      <div>
+        <div class="hero__stat-num accent2">2</div>
+        <div class="hero__stat-label">секунды на отметку</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <span class="section-label">Возможности</span>
+    <h2 class="section-title">Всё, что нужно<br>для учёта посещаемости</h2>
+    <p class="section-desc">
+      Администратор запускает опрос одной командой — бот сделает остальное
+      автоматически.
+    </p>
+
+    <div class="grid-3 stagger">
+      <div class="card animate-in">
+        <div class="card__icon">👑</div>
+        <h3>Роль администратора</h3>
+        <p style="margin-top:12px">
+          Пользователь с заданным Telegram ID имеет право запускать опросы.
+          Остальные команды для него недоступны простым студентам.
+        </p>
+      </div>
+      <div class="card animate-in">
+        <div class="card__icon">📢</div>
+        <h3>Массовая рассылка</h3>
+        <p style="margin-top:12px">
+          По команде <span class="mono">/poll</span> бот моментально
+          рассылает вопрос всем, кто хоть раз написал боту.
+        </p>
+      </div>
+      <div class="card animate-in">
+        <div class="card__icon">✅</div>
+        <h3>Быстрая отметка</h3>
+        <p style="margin-top:12px">
+          Одно нажатие — «Да» или «Нет». При отсутствии бот запрашивает
+          причину и сохраняет её в базу данных.
+        </p>
+      </div>
+      <div class="card animate-in">
+        <div class="card__icon">📝</div>
+        <h3>Фиксация причин</h3>
+        <p style="margin-top:12px">
+          Студент вводит причину отсутствия текстом — бот ждёт ответа
+          и записывает его к нужной отметке автоматически.
+        </p>
+      </div>
+      <div class="card animate-in">
+        <div class="card__icon">🗄️</div>
+        <h3>База данных посещений</h3>
+        <p style="margin-top:12px">
+          Все отметки хранятся в SQLite с привязкой к пользователю,
+          времени опроса и причине отсутствия.
+        </p>
+      </div>
+      <div class="card animate-in">
+        <div class="card__icon">🔒</div>
+        <h3>Приватность</h3>
+        <p style="margin-top:12px">
+          Бот работает только с теми, кто сам написал первым. Данные
+          хранятся локально, без сторонних серверов.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── HOW IT WORKS ────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <span class="section-label">Как это работает</span>
+    <h2 class="section-title">Три шага до результата</h2>
+
+    <div class="grid-3 stagger" style="margin-top:48px">
+      <div style="text-align:center; padding:32px 20px">
+        <div style="font-family:var(--font-display);font-size:3rem;font-weight:900;color:var(--accent);opacity:.3;line-height:1">01</div>
+        <h3 style="margin:16px 0 12px">Напишите боту</h3>
+        <p style="font-size:.9rem">
+          Отправьте <span class="mono">/start</span> в Telegram —
+          бот зарегистрирует вас и запомнит ваш chat_id для будущих рассылок.
+        </p>
+      </div>
+      <div style="text-align:center; padding:32px 20px">
+        <div style="font-family:var(--font-display);font-size:3rem;font-weight:900;color:var(--accent);opacity:.3;line-height:1">02</div>
+        <h3 style="margin:16px 0 12px">Администратор запускает опрос</h3>
+        <p style="font-size:.9rem">
+          Администратор отправляет команду <span class="mono">/poll</span> —
+          бот рассылает всем студентам вопрос: «Вы на паре?»
+        </p>
+      </div>
+      <div style="text-align:center; padding:32px 20px">
+        <div style="font-family:var(--font-display);font-size:3rem;font-weight:900;color:var(--accent);opacity:.3;line-height:1">03</div>
+        <h3 style="margin:16px 0 12px">Нажмите кнопку</h3>
+        <p style="font-size:.9rem">
+          «Да» — присутствие отмечено. «Нет» — бот попросит указать
+          причину. Всё займёт не больше 10 секунд.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── TECH STACK ──────────────────────────────── -->
+<section class="section-sm">
+  <div class="container">
+    <span class="section-label">Технологии</span>
+    <h2 class="section-title" style="margin-bottom:28px">Стек разработки</h2>
+    <div class="stack-pills">
+      <span class="pill">Python 3.11</span>
+      <span class="pill">aiogram</span>
+      <span class="pill">aiosqlite</span>
+      <span class="pill">SQLite</span>
+      <span class="pill">FSM (aiogram)</span>
+      <span class="pill">HTML / CSS</span>
+      <span class="pill">Git / GitHub</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <span class="footer__copy">© 2025 AttendBot — Проектная практика</span>
+      <ul class="footer__links">
+        <li><a href="about.html">О проекте</a></li>
+        <li><a href="team.html">Команда</a></li>
+        <li><a href="journal.html">Журнал</a></li>
+        <li><a href="resources.html">Ресурсы</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mouse-glow effect on cards
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+  });
+</script>
+</body>
+</html>

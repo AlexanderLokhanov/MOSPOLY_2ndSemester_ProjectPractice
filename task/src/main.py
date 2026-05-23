@@ -8,9 +8,9 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import Message, CallbackQuery
 
-import database as db
-from broadcaster import broadcast_poll
-from config import BOT_TOKEN, ADMIN_ID
+import task.src.database as db
+from task.src.broadcaster import broadcast_poll
+from task.src.config import BOT_TOKEN, ADMIN_ID
 
 
 class AbsenceReason(StatesGroup):

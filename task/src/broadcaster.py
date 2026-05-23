@@ -1,6 +1,6 @@
 from aiogram import Bot
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from database import get_all_chat_ids
+from task.src.database import get_all_chat_ids
 
 
 def build_poll_keyboard() -> InlineKeyboardMarkup:
